@@ -73,9 +73,26 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   if (introVideo) {
-    // 1.45x: Optimal speed for fast, punchy pacing while maintaining buttery 60fps smoothness
-    const OPTIMAL_SPEED = 1.45;
+    const OPTIMAL_SPEED = 1.35;
+    introVideo.muted = true;
+    introVideo.defaultMuted = true;
     introVideo.playbackRate = OPTIMAL_SPEED;
+
+    const startPlay = () => {
+      introVideo.playbackRate = OPTIMAL_SPEED;
+      introVideo.play().catch(() => {
+        // Fallback: if browser blocks autoplay, clicking page triggers it
+        const onFirstInteraction = () => {
+          introVideo.play().catch(() => {});
+          window.removeEventListener('click', onFirstInteraction);
+          window.removeEventListener('keydown', onFirstInteraction);
+          window.removeEventListener('touchstart', onFirstInteraction);
+        };
+        window.addEventListener('click', onFirstInteraction);
+        window.addEventListener('keydown', onFirstInteraction);
+        window.addEventListener('touchstart', onFirstInteraction);
+      });
+    };
 
     introVideo.addEventListener('timeupdate', () => {
       if (introVideo.duration) {
@@ -83,23 +100,24 @@ document.addEventListener('DOMContentLoaded', () => {
         if (introProgressBar) introProgressBar.style.width = `${pct}%`;
 
         // Start smooth crossfade slightly before end for seamless handoff
-        if (introVideo.currentTime >= introVideo.duration - 0.45) {
+        if (introVideo.currentTime >= introVideo.duration - 0.4) {
           blendIntroToHero();
         }
       }
     });
 
     introVideo.addEventListener('ended', blendIntroToHero);
+    introVideo.addEventListener('loadeddata', startPlay);
+    introVideo.addEventListener('canplay', startPlay);
 
-    // Autoplay with guaranteed speed setup
-    introVideo.play().then(() => {
-      introVideo.playbackRate = OPTIMAL_SPEED;
-    }).catch(() => {});
+    // Initial start attempt
+    startPlay();
   }
 
   // Skip button click
   if (skipIntroBtn) {
-    skipIntroBtn.addEventListener('click', () => {
+    skipIntroBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
       if (introVideo) introVideo.pause();
       blendIntroToHero();
     });
@@ -107,7 +125,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Scroll trigger to blend
   window.addEventListener('scroll', () => {
-    if (!introCompleted && window.scrollY > 20) {
+    if (!introCompleted && window.scrollY > 30) {
       blendIntroToHero();
     }
   }, { passive: true });
@@ -126,7 +144,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       introViewport.classList.remove('faded');
       introVideo.currentTime = 0;
-      introVideo.playbackRate = 1.45;
+      introVideo.playbackRate = 1.35;
       introVideo.play().catch(() => {});
     });
   }
