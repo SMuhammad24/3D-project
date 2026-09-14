@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Logitech MX Master 2S — Your World. Ultimate Control.</title>
+  <meta name="description" content="Experience the Logitech MX Master 2S through an award-winning Apple-style interactive scroll-bound 240-frame exploded engineering showcase." />
+  
+  <!-- Apple-inspired Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  
+  <script type="module" crossorigin src="./assets/index-B9vK0uke.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/index-CIkvYA36.css">
+</head>
+<body class="theme-dark">
+
+  <!-- Preloader Screen -->
+  <div id="preloader" class="preloader">
+    <div class="preloader-content">
+      <div class="preloader-brand">
+        <span class="logi-logo">logi</span>
+        <span class="model-badge">MX MASTER 2S</span>
+      </div>
+      <div class="preloader-bar-bg">
+        <div class="preloader-bar-fill" id="preload-fill"></div>
+      </div>
+      <div class="preloader-status">
+        <span id="preload-text">Loading 240 4K Frames...</span>
+        <span id="preload-pct" class="font-mono">0%</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Cinematic Optical Light Beam Sweep Flare -->
+  <div id="transition-beam" class="transition-beam">
+    <div class="beam-core"></div>
+    <div class="beam-flare"></div>
+  </div>
+
+  <!-- Cinematic Opening Intro Video Layer -->
+  <div id="intro-viewport" class="intro-viewport">
+    <video id="intro-video" class="intro-video" playsinline muted autoplay preload="auto" src="./media/intro-animation.mp4"></video>
+    <div class="intro-vignette"></div>
+    
+    <div class="intro-hud-top">
+      <div class="intro-brand-pill">
+        <span class="hud-pulse"></span>
+        <span>CINEMATIC INTRO EXPERIENCE</span>
+      </div>
+    </div>
+
+    <div class="intro-hud-bottom">
+      <div class="intro-progress-track">
+        <div id="intro-progress-bar" class="intro-progress-bar"></div>
+      </div>
+      <div class="intro-actions">
+        <button id="skip-intro-btn" class="skip-intro-btn">
+          <span>Skip to Product</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polygon points="5 4 15 12 5 20 5 4"></polygon>
+            <line x1="19" y1="5" x2="19" y2="19"></line>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Background Lighting Atmosphere -->
+  <div class="bg-glow bg-glow-1"></div>
+  <div class="bg-glow bg-glow-2"></div>
+  <div class="grid-subtle"></div>
+
+  <!-- Global Apple-Style Navigation Bar -->
+  <header class="apple-navbar nav-intro-hidden" id="main-navbar">
+    <div class="nav-container">
+      <div class="nav-left">
+        <a href="#" class="nav-brand">
+          <span class="logi-text">logi</span>
+          <span class="product-name">MX Master 2S</span>
+        </a>
+      </div>
+
+      <nav class="nav-menu">
+        <a href="#hero" class="nav-link active">Overview</a>
+        <a href="#features" class="nav-link">Technology</a>
+        <a href="#design" class="nav-link">Ergonomics</a>
+        <a href="#specs" class="nav-link">Specs</a>
+      </nav>
+
+      <div class="nav-right">
+        <!-- Replay Intro Video Button -->
+        <button id="replay-intro-btn" class="nav-btn-replay" title="Replay Cinematic Opening Video">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M1 4v6h6"></path>
+            <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path>
+          </svg>
+          <span>Replay Intro</span>
+        </button>
+
+        <!-- Interactive Colorway Switcher -->
+        <div class="color-picker-widget" title="Select Finish">
+          <button class="color-btn active" data-color="graphite" style="--c: #1e2124;" title="Graphite Black"></button>
+          <button class="color-btn" data-color="meteorite" style="--c: #5c626b;" title="Meteorite Grey"></button>
+          <button class="color-btn" data-color="teal" style="--c: #1b3a4b;" title="Midnight Blue"></button>
+        </div>
+
+        <button id="gallery-modal-btn" class="nav-btn-secondary" title="View 2K Photographic Gallery">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+            <circle cx="8.5" cy="8.5" r="1.5"/>
+            <polyline points="21 15 16 10 5 21"/>
+          </svg>
+          <span>Gallery</span>
+        </button>
+
+        <a href="#buy-section" class="nav-btn-primary" id="top-buy-btn">
+          <span>Buy Now</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Sticky Canvas Viewport (Scroll-Bound 240 Frames) -->
+  <div class="sticky-canvas-container canvas-intro-state" id="canvas-wrapper">
+    <canvas id="frame-canvas"></canvas>
+    <div class="canvas-vignette"></div>
+
+    <!-- HUD Scroll Position Indicator -->
+    <div class="hud-scroll-indicator hud-intro-hidden" id="hud-indicator">
+      <div class="hud-pill">
+        <span class="hud-pulse"></span>
+        <span class="hud-frame-counter">FRAME <strong id="hud-frame-num">001</strong> / 240</span>
+      </div>
+      <div class="hud-progress-line">
+        <div class="hud-progress-fill" id="hud-bar"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Scroll Journey Container -->
+  <main class="scroll-canvas-track" id="scroll-track">
+
+    <!-- 1. HERO SECTION: "Your World. Ultimate Control." -->
+    <section class="story-panel hero-panel" id="hero">
+      <div class="panel-inner hero-inner hero-intro-hidden" id="hero-card">
+        <div class="eyebrow-pill">
+          <span class="hud-pulse"></span>
+          FLAGSHIP ERGONOMIC PERFORMANCE
+        </div>
+        <h1 class="hero-title">
+          YOUR WORLD.<br />
+          <span class="gradient-text">ULTIMATE CONTROL.</span>
+        </h1>
+        <p class="hero-subtitle">
+          The definitive precision tool for masters of their craft. Scroll down to initiate the 240-frame microscopic technical disassembly.
+        </p>
+
+        <div class="hero-scroll-prompt">
+          <div class="scroll-pill-indicator">
+            <span class="scroll-wheel-dot"></span>
+          </div>
+          <span class="scroll-prompt-label">SCROLL TO DISASSEMBLE</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. INTERACTIVE TECHNOLOGY FEATURES SECTION (Pins & fades along scroll) -->
+    
+    <!-- Feature 1: Speed-Adaptive Scroll Wheel -->
+    <section class="story-panel" id="feat-wheel">
+      <div class="panel-inner card-left">
+        <div class="tech-card glass-panel">
+          <div class="tech-tag">KINETIC TRANSMISSION</div>
+          <h2 class="tech-title">Speed-Adaptive MagSpeed™ Scroll Wheel</h2>
+          <p class="tech-desc">
+            Machined from solid stainless steel. Automatically transitions from precise click-to-click ratcheting to hyper-fast free spin in a single flick—scrolling through 1,000 lines of code or data in one second with zero friction.
+          </p>
+          <div class="metric-row">
+            <div class="metric-item">
+              <span class="metric-val">1,000</span>
+              <span class="metric-label">Lines Per Second</span>
+            </div>
+            <div class="metric-item">
+              <span class="metric-val">CNC Steel</span>
+              <span class="metric-label">Machined Core</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Feature 2: 70-Day Power & Fast Recharge -->
+    <section class="story-panel" id="feat-power">
+      <div class="panel-inner card-right">
+        <div class="tech-card glass-panel">
+          <div class="tech-tag">ENERGY &amp; SUSTAINABILITY</div>
+          <h2 class="tech-title">70-Day Power Architecture</h2>
+          <p class="tech-desc">
+            Stay powered for up to 70 days on a single full charge. Quick-charge power management delivers a full 24 hours of continuous work in just 3 minutes via the integrated front micro-USB port.
+          </p>
+          <div class="metric-row">
+            <div class="metric-item">
+              <span class="metric-val">70 Days</span>
+              <span class="metric-label">Single Charge Life</span>
+            </div>
+            <div class="metric-item">
+              <span class="metric-val">3 Min</span>
+              <span class="metric-label">= 1 Full Day Power</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Feature 3: 4000-DPI Darkfield Sensor -->
+    <section class="story-panel" id="feat-sensor">
+      <div class="panel-inner card-left">
+        <div class="tech-card glass-panel">
+          <div class="tech-tag">OPTICAL LASER PRECISION</div>
+          <h2 class="tech-title">4000-DPI Darkfield™ Laser Sensor</h2>
+          <p class="tech-desc">
+            Flawless tracking on virtually any surface—even high-gloss 4mm clear glass. The advanced laser optical engine samples microscopic surface irregularities for sub-pixel accuracy at 4K and 8K monitor resolutions.
+          </p>
+          <div class="metric-row">
+            <div class="metric-item">
+              <span class="metric-val">4000 DPI</span>
+              <span class="metric-label">Sub-Pixel Tracking</span>
+            </div>
+            <div class="metric-item">
+              <span class="metric-val">Glass-Ready</span>
+              <span class="metric-label">Tracks on 4mm Glass</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Feature 4: Dual Connectivity & Logitech Flow -->
+    <section class="story-panel" id="feat-flow">
+      <div class="panel-inner card-right">
+        <div class="tech-card glass-panel">
+          <div class="tech-tag">MULTI-COMPUTER ECOSYSTEM</div>
+          <h2 class="tech-title">Dual Connectivity &amp; Logitech Flow™</h2>
+          <p class="tech-desc">
+            Connect seamlessly across up to 3 Windows and Mac computers via Bluetooth® Low Energy or the 2.4GHz Unifying™ receiver. Move your cursor across screens and copy-paste text, images, and files effortlessly between machines.
+          </p>
+          <div class="metric-row">
+            <div class="metric-item">
+              <span class="metric-val">3 Devices</span>
+              <span class="metric-label">Cross-Computer Flow</span>
+            </div>
+            <div class="metric-item">
+              <span class="metric-val">Dual Band</span>
+              <span class="metric-label">Bluetooth + 2.4GHz</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. DESIGN & ERGONOMICS SECTION -->
+    <section class="story-panel" id="design">
+      <div class="panel-inner card-center">
+        <div class="tech-card glass-panel full-width-card">
+          <div class="card-header-flex">
+            <div>
+              <div class="tech-tag">ANATOMICAL DESIGN</div>
+              <h2 class="tech-title">Hand-Sculpted Comfort. Matte Perfection.</h2>
+              <p class="tech-desc">
+                Crafted from an original hand-sculpted clay prototype. The natural contours support your palm and wrist in a relaxed posture while placing dedicated thumb buttons and gesture controls intuitively within reach.
+              </p>
+            </div>
+          </div>
+
+          <div class="specs-pill-grid">
+            <div class="spec-tile">
+              <span class="spec-label">Ergonomic Profile</span>
+              <span class="spec-value">Natural Wrist Support</span>
+            </div>
+            <div class="spec-tile">
+              <span class="spec-label">Side Thumb Wheel</span>
+              <span class="spec-value">Horizontal Dual-Axis Pan</span>
+            </div>
+            <div class="spec-tile">
+              <span class="spec-label">Tactile Switches</span>
+              <span class="spec-value">Omron 10M+ Clicks</span>
+            </div>
+            <div class="spec-tile">
+              <span class="spec-label">Glides</span>
+              <span class="spec-value">Low-Friction PTFE Teflon</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. TECHNICAL COMPARISON & BUY SECTION -->
+    <section class="story-panel end-panel" id="buy-section">
+      <div class="panel-inner buy-inner">
+        <div class="buy-card glass-panel">
+          <div class="buy-header">
+            <div class="buy-badge">OFFICIAL STORE</div>
+            <h2 class="buy-title">Upgrade Your Workflow Today</h2>
+            <p class="buy-subtitle">Includes MX Master 2S, Logitech Unifying Receiver, Micro-USB Charging Cable, and 2-Year Warranty.</p>
+          </div>
+
+          <!-- Comparison Table -->
+          <div class="table-container">
+            <table class="apple-table">
+              <thead>
+                <tr>
+                  <th>Technical Specification</th>
+                  <th>Logitech MX Master 2S</th>
+                  <th>Standard Wireless Mouse</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Laser Tracking Technology</td>
+                  <td><span class="spec-best">Darkfield™ 4000 DPI (Tracks on Glass)</span></td>
+                  <td>Standard Optical 1000 DPI (Needs Pad)</td>
+                </tr>
+                <tr>
+                  <td>Scroll Architecture</td>
+                  <td><span class="spec-best">MagSpeed™ Dual-Axis Kinetic Steel</span></td>
+                  <td>Mechanical Plastic Wheel</td>
+                </tr>
+                <tr>
+                  <td>Multi-Computer Workflow</td>
+                  <td><span class="spec-best">Logitech Flow™ (3-Device Live Transfer)</span></td>
+                  <td>Single Device Connection</td>
+                </tr>
+                <tr>
+                  <td>Battery &amp; Charging</td>
+                  <td><span class="spec-best">70-Day Rechargeable (3 min = 1 day)</span></td>
+                  <td>Disposable AA Batteries</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="buy-action-footer">
+            <div class="price-container">
+              <span class="price-original">$119.99</span>
+              <span class="price-current">$99.99</span>
+              <span class="price-shipping">Free 2-Day Express Delivery</span>
+            </div>
+
+            <div class="buy-button-group">
+              <button class="apple-btn-secondary" id="open-gallery-bottom">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                  <circle cx="8.5" cy="8.5" r="1.5"/>
+                  <polyline points="21 15 16 10 5 21"/>
+                </svg>
+                <span>View 2K Photos &amp; Video</span>
+              </button>
+              <button class="apple-btn-primary" id="preorder-cta">
+                <span>Buy Now</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                  <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- High-Res 2K Photo & Video Showcase Modal -->
+  <div class="modal-backdrop" id="gallery-modal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <div>
+          <h3 class="modal-title">Product Photographic &amp; Cinematic Gallery</h3>
+          <p class="modal-sub">2K Studio Renders &amp; 1080p Disassembly Videos</p>
+        </div>
+        <button class="modal-close-btn" id="close-gallery-btn">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Videos Section inside Gallery -->
+      <div class="media-video-section">
+        <h4 class="gallery-sub-heading">Cinematic Disassembly Sequences</h4>
+        <div class="video-grid">
+          <div class="video-card">
+            <video controls playsinline preload="metadata" src="./media/disassembly-video.mp4" poster="./media/exploded-view.jpeg"></video>
+            <div class="video-info">
+              <span class="v-title">Logitech MX Master 2S Disassembly</span>
+              <span class="v-badge">1080p 60fps</span>
+            </div>
+          </div>
+          <div class="video-card">
+            <video controls playsinline preload="metadata" src="./media/breakdown-video.mp4" poster="./media/sensor-grid.jpeg"></video>
+            <div class="video-info">
+              <span class="v-title">Technical Breakdown Sequence</span>
+              <span class="v-badge">1080p HD</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2K Photos Grid -->
+      <h4 class="gallery-sub-heading" style="margin-top: 24px;">2K High-Definition Renders</h4>
+      <div class="gallery-photo-grid">
+        <div class="gallery-item">
+          <div class="gallery-img-box">
+            <img src="./media/hero-mouse.jpeg" alt="Hero Overview" loading="lazy" />
+          </div>
+          <div class="gallery-caption"><strong>Hero Overview</strong> — Matte Graphite Assembled Profile</div>
+        </div>
+        <div class="gallery-item">
+          <div class="gallery-img-box">
+            <img src="./media/shell-lift.jpeg" alt="Ergonomic Shell Lift" loading="lazy" />
+          </div>
+          <div class="gallery-caption"><strong>Top Shell Lift</strong> — Omron Microswitch Architecture</div>
+        </div>
+        <div class="gallery-item">
+          <div class="gallery-img-box">
+            <img src="./media/wheel-float.jpeg" alt="Scroll Wheel Mechanism" loading="lazy" />
+          </div>
+          <div class="gallery-caption"><strong>MagSpeed Scroll Wheel</strong> — Solid CNC Stainless Steel</div>
+        </div>
+        <div class="gallery-item">
+          <div class="gallery-img-box">
+            <img src="./media/sensor-grid.jpeg" alt="Darkfield Sensor Optics" loading="lazy" />
+          </div>
+          <div class="gallery-caption"><strong>Darkfield™ Laser Engine</strong> — Optical Tracking on Glass</div>
+        </div>
+        <div class="gallery-item">
+          <div class="gallery-img-box">
+            <img src="./media/battery-components.jpeg" alt="Battery and Internal Sliders" loading="lazy" />
+          </div>
+          <div class="gallery-caption"><strong>Power System</strong> — 500mAh Fast Recharge Li-Po Cell</div>
+        </div>
+        <div class="gallery-item">
+          <div class="gallery-img-box">
+            <img src="./media/exploded-view.jpeg" alt="Exploded View of Mouse Components" loading="lazy" />
+          </div>
+          <div class="gallery-caption"><strong>Full Exploded Blueprint</strong> — Complete Multi-Layer Breakdown</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
