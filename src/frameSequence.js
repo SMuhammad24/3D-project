@@ -100,34 +100,18 @@ export class FrameSequenceEngine {
     const w = window.innerWidth;
     const h = window.innerHeight;
 
-    // 1. Fill entire canvas seamlessly with pure dark obsidian
-    this.ctx.fillStyle = '#07090d';
-    this.ctx.fillRect(0, 0, w, h);
-
-    // 2. Calculate aspect fit (contain mode)
+    // 1. Calculate edge-to-edge full-bleed cover scale (zero black borders on any screen)
     const imgW = img.naturalWidth;
     const imgH = img.naturalHeight;
-    const scale = Math.min(w / imgW, h / imgH);
+    const scale = Math.max(w / imgW, h / imgH);
 
     const drawW = imgW * scale;
     const drawH = imgH * scale;
     const drawX = (w - drawW) / 2;
     const drawY = (h - drawH) / 2;
 
-    // 3. Draw image
+    // 2. Draw frame cleanly edge-to-edge
     this.ctx.drawImage(img, drawX, drawY, drawW, drawH);
-
-    // 4. Soft Edge Feathering Vignette: dissolves any rectangular boundaries into #07090d
-    const grad = this.ctx.createRadialGradient(
-      w / 2, h / 2, Math.min(drawW, drawH) * 0.38,
-      w / 2, h / 2, Math.max(w, h) * 0.52
-    );
-    grad.addColorStop(0, 'rgba(7, 9, 13, 0)');
-    grad.addColorStop(0.65, 'rgba(7, 9, 13, 0.35)');
-    grad.addColorStop(1, 'rgba(7, 9, 13, 1)');
-
-    this.ctx.fillStyle = grad;
-    this.ctx.fillRect(0, 0, w, h);
 
     // 5. Update HUD
     const displayNum = String(idx + 1).padStart(3, '0');

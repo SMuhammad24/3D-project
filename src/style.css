@@ -218,15 +218,12 @@ body {
 .intro-video {
   width: 100%;
   height: 100%;
-  object-fit: contain;
+  object-fit: cover;
   display: block;
 }
 
 .intro-vignette {
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(circle at center, transparent 70%, rgba(7, 9, 13, 0.5) 100%);
-  pointer-events: none;
+  display: none;
 }
 
 .intro-hud-top {
@@ -541,10 +538,7 @@ body {
 }
 
 .canvas-vignette {
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(circle at center, transparent 70%, rgba(7, 9, 13, 0.4) 100%);
-  pointer-events: none;
+  display: none;
 }
 
 /* Apple Notification-Style HUD Frame Counter */
