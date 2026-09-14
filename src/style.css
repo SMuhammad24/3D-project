@@ -541,67 +541,15 @@ body {
   display: none;
 }
 
-/* Apple Notification-Style HUD Frame Counter */
-.hud-scroll-indicator {
-  position: absolute;
-  bottom: 28px;
-  right: 36px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 8px;
-  pointer-events: auto;
-  transform: translateX(0);
-  opacity: 1;
-  transition: transform 0.9s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.9s ease;
-}
-
-.hud-scroll-indicator.hud-intro-hidden {
-  transform: translateX(24px);
-  opacity: 0;
-}
-
-.hud-pill {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  background: var(--apple-glass-bg);
-  backdrop-filter: blur(28px) saturate(190%);
-  -webkit-backdrop-filter: blur(28px) saturate(190%);
-  border: 1px solid var(--apple-glass-border);
-  padding: 7px 16px;
-  border-radius: var(--radius-full);
-  font-family: var(--font-mono);
-  font-size: 11px;
-  color: #fff;
-  box-shadow: var(--shadow-apple-glass);
-}
-
-.hud-pill strong {
-  color: var(--accent-cyan);
-}
-
-.hud-pulse {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--accent-cyan);
-  box-shadow: 0 0 8px var(--accent-cyan);
-}
-
-.hud-progress-line {
-  width: 130px;
-  height: 3px;
-  background: rgba(255, 255, 255, 0.15);
-  border-radius: var(--radius-full);
-  overflow: hidden;
-}
-
-.hud-progress-fill {
-  width: 0%;
-  height: 100%;
-  background: var(--accent-cyan);
-  box-shadow: 0 0 8px var(--accent-cyan);
+/* Apple Notification-Style HUD Frame Counter (Removed as requested) */
+.hud-scroll-indicator,
+.hud-pill,
+.intro-hud-top,
+.intro-brand-pill {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
 }
 
 /* Scroll Journey Track */
